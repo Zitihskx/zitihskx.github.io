@@ -1,0 +1,236 @@
+[
+  {
+    "title": "Explainability-Guided Adversarial Attacks on Transformer-Based Malware Detectors Using Control Flow Graphs",
+    "authors": "A Wheeler, K Aryal, M Gupta",
+    "venue": "The 2nd International Conference on Artificial Intelligence Systems (AIS)",
+    "year": "2026",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2604.03843"
+      }
+    ]
+  },
+  {
+    "title": "Graphene: Leveraging Transformers with Control Flow Modalities for Malware Detection",
+    "authors": "A Wheeler, K Aryal, M Gupta",
+    "venue": "IEEE 5th International Conference on AI in Cybersecurity (ICAIC)",
+    "year": "2026",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/11395802"
+      }
+    ]
+  },
+  {
+    "title": "A Survey of Agentic AI and Cybersecurity: Challenges, Opportunities and Use-case Prototypes",
+    "authors": "SJ Lazer, K Aryal, M Gupta, E Bertino",
+    "venue": "Preprint",
+    "year": "2025",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2601.05293"
+      }
+    ]
+  },
+  {
+    "title": "Ensemble-based Intrusion Detection System for Electric Vehicles Charging Stations using Machine Learning",
+    "authors": "B KC, K Aryal, S Paudel",
+    "venue": "Journal of Applied Artificial Intelligence",
+    "year": "2025",
+    "type": "journal",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://www.sabapub.com/index.php/jaai/article/view/1461"
+      }
+    ]
+  },
+  {
+    "title": "RAG-Targeted Adversarial Attack on LLM-based Threat Detection and Mitigation Framework",
+    "authors": "S Ikbarieh, K Aryal, M Gupta",
+    "venue": "Preprint",
+    "year": "2025",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2511.06212"
+      }
+    ]
+  },
+  {
+    "title": "Intra-section Code Cave Injection for Adversarial Evasion Attacks on Windows PE Malware File",
+    "authors": "K Aryal, M Gupta, M Abdelsalam, M Saleh",
+    "venue": "Computers & Security, 104690",
+    "year": "2025",
+    "type": "journal",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://www.sciencedirect.com/science/article/abs/pii/S0167404825003797"
+      }
+    ]
+  },
+  {
+    "title": "Safety and Security Analysis of Large Language Models: Benchmarking Risk Profile and Harm Potential",
+    "authors": "C Akiri, H Simpson, K Aryal, A Khanna, M Gupta",
+    "venue": "arXiv preprint arXiv:2509.10655",
+    "year": "2025",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2509.10655"
+      }
+    ]
+  },
+  {
+    "title": "SoK: Leveraging Transformers for Malware Analysis",
+    "authors": "P Kunwar, K Aryal, M Gupta, M Abdelsalam, E Bertino",
+    "venue": "IEEE Transactions on Dependable and Secure Computing",
+    "year": "2025",
+    "type": "journal",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/11026080"
+      }
+    ]
+  },
+  {
+    "title": "From KL Divergence to Wasserstein Distance: Enhancing Autoencoders with FID Analysis",
+    "authors": "LK Poudel, K Aryal, RB Thapa, S Poudel",
+    "venue": "The Florida Artificial Intelligence Research Society (FLAIRS) 38",
+    "year": "2025",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://journals.flvc.org/FLAIRS/article/download/139006/144088"
+      }
+    ]
+  },
+  {
+    "title": "A Survey on Adversarial Attacks for Malware Analysis",
+    "authors": "K Aryal, M Gupta, M Abdelsalam, P Kunwar, B Thuraisingham",
+    "venue": "IEEE Access, 428-259",
+    "year": "2024",
+    "type": "journal",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10806701"
+      }
+    ]
+  },
+  {
+    "title": "Not All Malware are Born Equally: An Empirical Analysis of Adversarial Evasion Attacks in Relation to Malware Types and PE Files Structure",
+    "authors": "P Mummaneni, K Aryal, M Abdelsalam, M Gupta",
+    "venue": "2024 IEEE International Conference on Big Data (BigData), 5620-5629",
+    "year": "2024",
+    "type": "workshop",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10826102"
+      }
+    ]
+  },
+  {
+    "title": "Explainability-Informed Targeted Malware Misclassification",
+    "authors": "Q Card, K Aryal, M Gupta",
+    "venue": "33rd International Conference on Computer Communications and Networks (ICCCN)",
+    "year": "2024",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10637629"
+      }
+    ]
+  },
+  {
+    "title": "Explainability Guided Adversarial Evasion Attacks on Malware Detectors",
+    "authors": "K Aryal, M Gupta, M Abdelsalam, M Saleh",
+    "venue": "33rd International Conference on Computer Communications and Networks (ICCCN)",
+    "year": "2024",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10637577"
+      }
+    ]
+  },
+  {
+    "title": "Explainable Deep Learning Models for Dynamic and Online Malware Classification",
+    "authors": "Q Card, D Simpson, K Aryal, M Gupta, SR Islam",
+    "venue": "2024 IEEE International Conference on Smart Computing (SMARTCOMP)",
+    "year": "2024",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10595665"
+      }
+    ]
+  },
+  {
+    "title": "From ChatGPT to ThreatGPT: Impact of Generative AI in Cybersecurity and Privacy",
+    "authors": "M Gupta, CK Akiri, K Aryal, E Parker, L Praharaj",
+    "venue": "IEEE Access 11, 80218-80245",
+    "year": "2023",
+    "type": "journal",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10198233"
+      }
+    ]
+  },
+  {
+    "title": "Using Machine Learning for Detection and Classification of Cyber Attacks in Edge IoT",
+    "authors": "E Becker, M Gupta, K Aryal",
+    "venue": "2023 IEEE International Conference on Edge Computing and Communications",
+    "year": "2023",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10234279"
+      }
+    ]
+  },
+  {
+    "title": "Exploiting Windows PE Structure for Adversarial Malware Evasion Attacks",
+    "authors": "K Aryal, M Gupta, M Abdelsalam",
+    "venue": "Proceedings of the Thirteenth ACM Conference on Data and Application Security and Privacy (CODASPY)",
+    "year": "2023",
+    "type": "poster",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://dl.acm.org/doi/abs/10.1145/3577923.3585044"
+      }
+    ]
+  },
+  {
+    "title": "Analysis of Label-Flip Poisoning Attack on Machine Learning Based Malware Detector",
+    "authors": "K Aryal, M Gupta, M Abdelsalam",
+    "venue": "2022 IEEE International Conference on Big Data (Big Data)",
+    "year": "2022",
+    "type": "workshop",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://ieeexplore.ieee.org/abstract/document/10020528"
+      }
+    ]
+  }
+]
