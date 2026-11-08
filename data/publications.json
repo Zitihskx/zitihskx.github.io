@@ -1,5 +1,44 @@
 [
   {
+    "title": "Malformer: A Multi-Modal Malware Detector Using Transformers",
+    "authors": "S Howard, K Aryal, M Abdelsalam, M Gupta, A Wheeler, P Kunwar",
+    "venue": "arXiv preprint",
+    "year": "2026",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2608.19052"
+      }
+    ]
+  },
+  {
+    "title": "VEXAIoT: Autonomous IoT Vulnerability EXploitation using AI Agents",
+    "authors": "K Swinea, K Aryal, L Praharaj, M Gupta",
+    "venue": "arXiv preprint",
+    "year": "2026",
+    "type": "preprint",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://arxiv.org/abs/2607.09653"
+      }
+    ]
+  },
+  {
+    "title": "The Forgotten Stub: Exploring Malicious Use of the PE DOS Header",
+    "authors": "S Mandal, K Aryal, W Mahoney",
+    "venue": "European Conference on Cyber Warfare and Security, 502-508",
+    "year": "2026",
+    "type": "conference",
+    "links": [
+      {
+        "label": "Paper",
+        "url": "https://pdfs.semanticscholar.org/a1a6/7f3647007d8b4f7719f562fd9d58c768b609.pdf"
+      }
+    ]
+  },
+  {
     "title": "Explainability-Guided Adversarial Attacks on Transformer-Based Malware Detectors Using Control Flow Graphs",
     "authors": "A Wheeler, K Aryal, M Gupta",
     "venue": "The 2nd International Conference on Artificial Intelligence Systems (AIS)",
@@ -52,18 +91,18 @@
     ]
   },
   {
-    "title": "RAG-Targeted Adversarial Attack on LLM-based Threat Detection and Mitigation Framework",
-    "authors": "S Ikbarieh, K Aryal, M Gupta",
-    "venue": "Preprint",
-    "year": "2025",
-    "type": "preprint",
-    "links": [
-      {
-        "label": "Paper",
-        "url": "https://arxiv.org/abs/2511.06212"
-      }
-    ]
-  },
+  "title": "Rag-targeted adversarial attack on LLM-based threat detection and mitigation framework",
+  "authors": "S Ikbarieh, K Aryal, M Gupta",
+  "venue": "IEEE International Conference on Big Data (BigData)",
+  "year": "2025",
+  "type": "conference",
+  "links": [
+    {
+      "label": "Paper",
+      "url": "https://ieeexplore.ieee.org/abstract/document/11401900/"
+    }
+  ]
+},
   {
     "title": "Intra-section Code Cave Injection for Adversarial Evasion Attacks on Windows PE Malware File",
     "authors": "K Aryal, M Gupta, M Abdelsalam, M Saleh",
