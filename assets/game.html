@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07111d">
+<title>Signal Siege Arcade — FreeCafe Defender</title>
+<style>
+:root{
+  --bg:#07111d;--panel:#102238;--panel2:#162d47;--line:#355a77;--ink:#f5fbff;--mut:#a9bfd2;
+  --cyan:#58caff;--green:#39e4ac;--red:#ff6678;--amber:#ffbd58;--purple:#ba94ff;
+  --shadow:0 18px 55px rgba(0,0,0,.38)
+}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:15px/1.42 system-ui,-apple-system,Segoe UI,sans-serif;overscroll-behavior:none}button,input{font:inherit}button{cursor:pointer}
+body{background:radial-gradient(ellipse at 50% -15%,#18385d 0,transparent 60%),var(--bg)}
+#app{max-width:1080px;margin:auto;padding:14px 14px 28px}
+header{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}.brand{font-weight:1000;font-size:clamp(22px,4vw,31px);letter-spacing:-.05em}.brand span{color:var(--green)}.kicker{font:900 11px ui-monospace,monospace;color:var(--cyan);letter-spacing:.16em}.hdrBtns{display:flex;gap:7px}.iconBtn{border:1px solid var(--line);background:#132942;color:var(--ink);border-radius:11px;padding:8px 11px;font-weight:900}
+.hud{display:grid;grid-template-columns:1fr .75fr .75fr .9fr;gap:8px;margin-bottom:9px}.hudCard{border:1px solid var(--line);background:#102137e8;border-radius:14px;padding:8px 11px}.hudLab{font-size:10px;color:var(--mut);font-weight:900;letter-spacing:.11em}.hudVal{font-size:22px;font-weight:1000;font-variant-numeric:tabular-nums}.healthTrack{height:7px;background:#2c4254;border-radius:999px;overflow:hidden;margin-top:4px}.healthFill{height:100%;background:linear-gradient(90deg,var(--red),var(--amber),var(--green));transition:width .25s}.badges{display:flex;gap:5px;flex-wrap:wrap;margin-top:4px}.badge{font-size:9px;border:1px solid #42637c;background:#152b43;border-radius:999px;padding:3px 6px;color:#7f9db2}.badge.on{border-color:var(--green);color:var(--green);background:#0f342e}
+#mission{min-height:58px;display:flex;align-items:center;justify-content:center;text-align:center;background:#132841;border:1px solid #42617b;border-radius:16px;margin:0 0 9px;padding:9px 14px;position:relative;overflow:hidden}.missionIcon{font-size:24px;margin-right:9px}.missionCopy{font-weight:950}.missionCopy small{display:block;color:var(--mut);font-weight:700;margin-top:2px}.eventBar{position:absolute;left:0;bottom:0;height:4px;background:var(--amber);transition:width .12s linear}
+#stage{position:relative;height:min(560px,64vh);min-height:430px;border:1px solid #42627c;border-radius:24px;overflow:hidden;isolation:isolate;background:
+ linear-gradient(#091827aa,#091827aa),
+ radial-gradient(circle at 24% 13%,#2c6a6b55,transparent 35%),
+ linear-gradient(160deg,#18314b,#0b1827 78%);box-shadow:var(--shadow)}
+#stage:before{content:"";position:absolute;inset:0;background:linear-gradient(0deg,transparent 49%,#31506d25 50%,transparent 51%),linear-gradient(90deg,transparent 49%,#31506d25 50%,transparent 51%);background-size:55px 55px;pointer-events:none}
+.cafeSign{position:absolute;left:18px;top:16px;background:#5d382f;border:1px solid #b27b58;border-radius:13px;padding:7px 11px;font-weight:1000;color:#ffd39c;box-shadow:0 8px 18px #0005}.official{position:absolute;right:17px;top:16px;color:#bcefdc;border:1px solid #2e8a6e;background:#0e372eaa;border-radius:12px;padding:6px 10px;font:900 10px ui-monospace,monospace;letter-spacing:.08em}
+.legitAP{position:absolute;left:50%;top:68px;transform:translateX(-50%);width:168px;border:2px solid var(--cyan);border-radius:17px;background:#153451;padding:11px;text-align:center;z-index:2;box-shadow:0 0 28px #58caff22}.apIcon{font-size:37px;line-height:1}.ssid{font-weight:1000;font-size:14px}.apMeta{font:800 10px ui-monospace,monospace;color:#9fbcd0;margin-top:2px}.officialTag{display:inline-block;color:var(--green);font-size:10px;font-weight:1000;margin-top:4px}
+.counter{position:absolute;left:4%;right:4%;bottom:23%;height:20px;background:linear-gradient(#9d6340,#664029);border-radius:12px 12px 4px 4px;box-shadow:0 12px 0 #4a2e20,0 18px 30px #0008}.table{position:absolute;width:110px;height:55px;border-radius:60% 60% 8px 8px;background:#4c3025;border:2px solid #936043;bottom:62px}.table.t1{left:8%}.table.t2{left:37%}.table.t3{right:8%}.plant{position:absolute;right:4%;bottom:85px;font-size:52px}.door{position:absolute;left:3%;top:112px;width:65px;height:130px;border:3px solid #5e7890;border-bottom:0;border-radius:30px 30px 0 0;background:#20354b;display:flex;align-items:center;justify-content:center;color:#7ca2ba;font-size:30px}
+.customers{position:absolute;left:6%;right:6%;bottom:73px;display:flex;justify-content:space-around;align-items:end;z-index:3}.customer{width:105px;text-align:center;position:relative}.customer .face{font-size:42px;filter:drop-shadow(0 5px 7px #0006)}.customer .name{font-weight:950;font-size:11px}.customer .state{font-size:9px;color:var(--mut)}.customer.danger .face{animation:shake .35s infinite alternate}.customer.compromised:after{content:"!";position:absolute;right:14px;top:0;background:var(--red);border:2px solid white;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-weight:1000}.customer button{margin-top:3px;border:1px solid var(--red);background:#4c1f2a;color:#fff;border-radius:9px;padding:5px 7px;font-size:9px;font-weight:900}
+.quarantine{position:absolute;right:18px;bottom:14px;width:112px;height:62px;border:2px dashed var(--amber);border-radius:14px;background:#3c2b1b99;display:flex;align-items:center;justify-content:center;text-align:center;font:900 10px ui-monospace,monospace;color:var(--amber);z-index:7}.quarantine.hot{background:#704714;box-shadow:0 0 22px #ffbd5870}.shredder{position:absolute;left:18px;bottom:14px;width:103px;height:62px;border:2px dashed var(--purple);border-radius:14px;background:#2a214199;display:flex;align-items:center;justify-content:center;text-align:center;font:900 10px ui-monospace,monospace;color:var(--purple);z-index:7}.shredder.hot{background:#513a7a;box-shadow:0 0 22px #ba94ff70}
+.eventLayer{position:absolute;inset:0;z-index:10;pointer-events:none}.eventObj{pointer-events:auto;touch-action:none;user-select:none}.evilAP{position:absolute;top:79px;width:160px;border:3px solid var(--red);border-radius:17px;background:#502332;padding:11px;text-align:center;box-shadow:0 0 28px #ff66784a;animation:float 1.5s ease-in-out infinite alternate}.evilAP .ssid{color:#fff}.evilAP .apMeta{color:#ffc2ca}.evilAP .tapHint{font-size:10px;color:var(--amber);font-weight:1000;margin-top:4px}.scanFlash{position:absolute;inset:-7px;border:2px solid #fff;border-radius:21px;animation:ring .7s ease-out forwards}
+.rogueRouter{position:absolute;top:205px;left:15%;width:128px;border:3px solid var(--amber);background:#4d321a;border-radius:16px;padding:10px;text-align:center;box-shadow:0 0 25px #ffbd5840}.rogueRouter .cable{position:absolute;left:100%;top:50%;width:170px;height:4px;background:var(--amber);transform-origin:left center}.rogueRouter.dragging,.sticky.dragging{opacity:.86;transform:scale(1.05);z-index:20}.rogueRouter .small,.sticky .small{font-size:9px;color:#ffe0ac;font-weight:800}
+.portal{position:absolute;top:48%;left:50%;transform:translate(-50%,-50%);width:min(360px,86%);background:#fff;color:#1c2935;border:4px solid var(--red);border-radius:20px;padding:16px;box-shadow:0 0 0 500px #050b14a8,0 20px 60px #000b;text-align:center}.portal h3{margin:2px 0 8px}.portal p{font-size:12px;color:#536270}.portal .field{background:#e8edf2;border:1px solid #c4ccd4;border-radius:9px;padding:8px;text-align:left;color:#7d8894;margin:5px}.portal .closeX{position:absolute;right:8px;top:5px;border:0;background:transparent;color:var(--red);font-size:26px;font-weight:1000}.swipeHint{font-size:10px;color:var(--red);font-weight:1000;margin-top:8px}.portal.swiping{transition:none}
+.deauthWrap{position:absolute;inset:0}.attacker{position:absolute;right:5%;top:160px;font-size:49px}.pulse{position:absolute;right:9%;top:194px;width:30px;height:30px;border:4px solid var(--red);border-radius:50%;animation:pulseOut 1.2s linear infinite}.pulse.p2{animation-delay:.4s}.pulse.p3{animation-delay:.8s}.shieldBtn{position:absolute;left:50%;top:53%;transform:translate(-50%,-50%);border:3px solid var(--green);background:#0f483c;color:#eafff7;border-radius:50%;width:118px;height:118px;font-weight:1000;font-size:15px;box-shadow:0 0 30px #39e4ac55;animation:shieldPulse .8s ease-in-out infinite alternate}.shieldBtn span{font-size:34px;display:block}
+.sticky{position:absolute;left:18%;top:210px;width:150px;min-height:95px;background:#ffe591;color:#47370a;border:3px solid #d9ac27;border-radius:7px 7px 17px 7px;padding:12px;transform:rotate(-4deg);box-shadow:0 12px 25px #0007;font-weight:1000;text-align:center}.sticky code{display:block;margin-top:8px;background:#fff3bf;padding:6px;border-radius:8px;font-size:12px}.sticky .small{color:#7c5d00}
+.certCard{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(390px,88%);background:#f5f8fb;color:#182635;border:4px solid var(--amber);border-radius:20px;padding:16px;box-shadow:0 0 0 500px #050b1490,0 20px 55px #000a;text-align:left}.certCard h3{margin:0 0 7px}.certRow{display:grid;grid-template-columns:105px 1fr;gap:6px;font-size:12px;margin:4px 0}.certRow b{color:#6b7884}.rejectBtn{width:100%;margin-top:11px;border:0;background:var(--red);color:white;border-radius:11px;padding:11px;font-weight:1000}
+.karma{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:min(430px,90%);display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:center}.phoneCard,.karmaAP{border-radius:18px;padding:15px;text-align:center;box-shadow:var(--shadow)}.phoneCard{background:#163452;border:2px solid var(--cyan)}.karmaAP{background:#4c2431;border:2px solid var(--red)}.phoneCard .phone{font-size:48px}.karmaAP .ant{font-size:45px}.toggle{margin-top:10px;border:0;border-radius:999px;background:var(--amber);color:#3b2700;font-weight:1000;padding:10px 14px}
+.recovery{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:min(410px,88%);background:#30203d;border:3px solid var(--purple);border-radius:20px;padding:18px;text-align:center;box-shadow:0 0 0 500px #050b147c}.recovery h3{margin:0 0 8px}.recovery button{border:0;background:var(--purple);color:#160c22;font-weight:1000;border-radius:12px;padding:12px 17px}
+.toast{position:absolute;left:50%;bottom:84px;transform:translateX(-50%);z-index:30;max-width:85%;background:#162d45;border:1px solid #547596;border-radius:12px;padding:9px 13px;font-size:12px;font-weight:900;text-align:center;box-shadow:var(--shadow)}.toast.good{border-color:var(--green)}.toast.bad{border-color:var(--red)}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}.how div{border:1px solid var(--line);background:#102138;border-radius:13px;padding:9px;text-align:center;color:var(--mut);font-size:10px}.how b{display:block;color:var(--ink);font-size:12px;margin-bottom:2px}.how .emoji{font-size:21px}
+.veil{position:fixed;inset:0;z-index:100;background:#06101de9;display:flex;justify-content:center;align-items:center;padding:17px;overflow:auto}.modal{width:min(620px,100%);background:linear-gradient(145deg,#162d46,#0c1c2d);border:1px solid #45647e;border-radius:25px;padding:25px;box-shadow:var(--shadow)}.eyebrow{font:900 11px ui-monospace,monospace;color:var(--green);letter-spacing:.15em}.modal h1{font-size:clamp(35px,8vw,61px);line-height:.98;margin:10px 0;letter-spacing:-.06em}.modal p{color:#b9cddd}.rules{background:#0d1e30;border:1px solid #334e69;border-radius:15px;padding:13px 15px;margin:14px 0}.rules b{color:var(--green)}.bigBtn{width:100%;border:0;background:var(--green);color:#06291c;border-radius:13px;padding:15px;font-weight:1000;font-size:16px}.secondBtn{width:100%;border:1px solid #496982;background:#20364d;color:#fff;border-radius:12px;padding:12px;font-weight:900;margin-top:8px}.statsGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:13px 0}.statsGrid div{background:#102138;border-radius:12px;padding:11px}.statsGrid strong{display:block;font-size:24px}.statsGrid small{color:var(--mut)}
+@keyframes pulseOut{0%{transform:scale(.3);opacity:1}100%{transform:translate(-480px) scale(5);opacity:0}}@keyframes shieldPulse{to{box-shadow:0 0 50px #39e4ac99;transform:translate(-50%,-50%) scale(1.04)}}@keyframes float{to{transform:translateY(-6px)}}@keyframes ring{to{inset:-25px;opacity:0}}@keyframes shake{to{transform:translateX(4px)}}
+@media(max-width:720px){#app{padding:9px}.hud{grid-template-columns:1fr 1fr}.hudCard:nth-child(1){grid-column:span 2}.how{grid-template-columns:repeat(2,1fr)}#stage{height:62vh;min-height:480px}.legitAP{top:60px;width:145px}.customers{bottom:78px;left:2%;right:2%}.customer{width:82px}.customer .face{font-size:35px}.customer .name{font-size:9px}.customer .state{display:none}.quarantine,.shredder{width:90px;height:58px}.evilAP{width:140px}.karma{grid-template-columns:1fr}.karmaAP{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <div><div class="kicker">CLASSROOM ARCADE · DIRECT INTERACTION</div><div class="brand">☕ Signal <span>Siege</span></div></div>
+  <div class="hdrBtns"><button class="iconBtn" id="helpBtn">?</button><button class="iconBtn" id="pauseBtn">Ⅱ</button><button class="iconBtn" id="resetBtn">↻</button></div>
+</header>
+<div class="hud">
+  <div class="hudCard"><div class="hudLab">CAFÉ SECURITY</div><div class="hudVal"><span id="healthVal">100</span>%</div><div class="healthTrack"><div class="healthFill" id="healthFill" style="width:100%"></div></div></div>
+  <div class="hudCard"><div class="hudLab">TIME</div><div class="hudVal" id="timeVal">180</div></div>
+  <div class="hudCard"><div class="hudLab">SCORE</div><div class="hudVal" id="scoreVal">0</div></div>
+  <div class="hudCard"><div class="hudLab">AUTO-DEFENSES</div><div class="badges"><span class="badge" id="certBadge">CERT</span><span class="badge" id="pmfBadge">PMF</span><span class="badge" id="wpaBadge">WPA3</span></div></div>
+</div>
+<div id="mission"><div class="missionIcon" id="missionIcon">☕</div><div class="missionCopy" id="missionCopy">Keep FreeCafe online.<small>Threats will appear in the café. Act directly on them.</small></div><div class="eventBar" id="eventBar" style="width:0"></div></div>
+<div id="stage">
+  <div class="cafeSign">FREECAFE · OPEN</div><div class="official">OFFICIAL NETWORK CARD</div>
+  <div class="door">🚪</div>
+  <div class="legitAP" id="legitAP"><div class="apIcon">📡</div><div class="ssid">FreeCafe_WiFi</div><div class="apMeta">BSSID 9A:14:C0:FF:EE:01</div><div class="officialTag">✓ IT INVENTORY MATCH</div></div>
+  <div class="counter"></div><div class="table t1"></div><div class="table t2"></div><div class="table t3"></div><div class="plant">🪴</div>
+  <div class="customers" id="customers"></div>
+  <div class="shredder" id="shredder">🗑️<br>SHRED LEAKED<br>PASSWORD</div>
+  <div class="quarantine" id="quarantine">📦<br>IT QUARANTINE</div>
+  <div class="eventLayer" id="eventLayer"></div>
+  <div id="toastLayer"></div>
+</div>
+<div class="how">
+  <div><span class="emoji">👆</span><b>Tap</b>impostors, warnings, shields</div>
+  <div><span class="emoji">🫳</span><b>Drag</b>rogue hardware or leaked secrets</div>
+  <div><span class="emoji">↔️</span><b>Swipe</b>fake login pages away</div>
+  <div><span class="emoji">⚡</span><b>Build a streak</b>to unlock automatic defenses</div>
+</div>
+</div>
+<div class="veil" id="overlay"><div class="modal" id="modal"></div></div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id), stage=$('stage'), layer=$('eventLayer');
+const TOTAL=180;
+const customers=[
+ {id:1,name:'Maya',face:'👩🏽‍💻',state:'checking email',comp:false},
+ {id:2,name:'Leo',face:'🧑🏻‍🎓',state:'studying',comp:false},
+ {id:3,name:'Priya',face:'👩🏾‍🔬',state:'video call',comp:false},
+ {id:4,name:'Noah',face:'🧑🏼‍💼',state:'remote work',comp:false}
+];
+let G;
+function fresh(){return{phase:'intro',time:TOTAL,health:100,score:0,streak:0,handled:0,missed:0,event:null,eventLeft:0,eventMax:1,nextIn:1.3,last:performance.now(),toast:null,customers:customers.map(x=>({...x})),queue:[],up:{cert:false,pmf:false,wpa3:false},pendingRecovery:null,best:0,returnToGame:false}}
+function renderCustomers(){
+ $('customers').innerHTML=G.customers.map(c=>`<div class="customer ${c.comp?'compromised':''}" data-customer="${c.id}"><div class="face">${c.face}</div><div class="name">${c.name}</div><div class="state">${c.comp?'account at risk':c.state}</div>${c.comp?'<button data-reset="'+c.id+'">RESET ACCOUNT</button>':''}</div>`).join('');
+ document.querySelectorAll('[data-reset]').forEach(b=>b.onclick=()=>resolveRecovery(Number(b.dataset.reset)));
+}
+function hud(){
+ $('healthVal').textContent=Math.ceil(G.health);$('healthFill').style.width=Math.max(0,G.health)+'%';$('timeVal').textContent=Math.ceil(G.time);$('scoreVal').textContent=G.score;
+ $('certBadge').classList.toggle('on',G.up.cert);$('pmfBadge').classList.toggle('on',G.up.pmf);$('wpaBadge').classList.toggle('on',G.up.wpa3);
+}
+function mission(icon,title,detail,pct=100){G.mission={icon,title,detail};$('missionIcon').textContent=icon;$('missionCopy').innerHTML=`${title}<small>${detail}</small>`;$('eventBar').style.width=pct+'%'}
+function toast(msg,type='good'){G.toast={until:performance.now()+1700};$('toastLayer').innerHTML=`<div class="toast ${type}">${msg}</div>`}
+function clearToast(now){if(G.toast&&now>G.toast.until){G.toast=null;$('toastLayer').innerHTML=''}}
+function impact(n){G.health=Math.max(0,Math.min(100,G.health+n));hud();if(G.health<=0)finish(false)}
+function points(base,msg){G.streak++;G.handled++;G.score+=base+Math.min(100,G.streak*10);impact(2);toast(`${msg} +${base+Math.min(100,G.streak*10)}`);unlock();hud()}
+function unlock(){
+ if(G.handled===3&&!G.up.cert){G.up.cert=true;toast('Upgrade unlocked: strict certificate validation!')}
+ if(G.handled===6&&!G.up.pmf){G.up.pmf=true;toast('Upgrade unlocked: Protected Management Frames!')}
+ if(G.handled===9&&!G.up.wpa3){G.up.wpa3=true;toast('Upgrade unlocked: WPA3-SAE!')}
+}
+function fail(msg,damage=16){G.missed++;G.streak=0;impact(-damage);toast(msg,'bad');}
+function chooseType(){
+ const pool=['evil','rogue','portal','deauth','password','cert','karma'];
+ let last=G.queue[G.queue.length-1];let options=pool.filter(x=>x!==last);
+ let type=options[Math.floor(Math.random()*options.length)];G.queue.push(type);return type;
+}
+function nextEvent(){if(G.phase!=='play'||G.event)return;if(G.pendingRecovery){spawnRecovery(G.pendingRecovery);G.pendingRecovery=null;return}spawn(chooseType())}
+function startEvent(type,duration){G.event=type;G.eventMax=duration;G.eventLeft=duration;layer.innerHTML=''}
+function endEvent(delay=1.05){G.event=null;G.eventLeft=0;G.nextIn=delay;setTimeout(()=>{if(G.phase==='play'&&!G.event)mission('☕','Café secure for the moment…','Watch the scene—the next threat can appear anywhere.',0)},220)}
+function spawn(type){
+ if(type==='evil')spawnEvil();if(type==='rogue')spawnRogue();if(type==='portal')spawnPortal();if(type==='deauth')spawnDeauth();if(type==='password')spawnPassword();if(type==='cert')spawnCert();if(type==='karma')spawnKarma();
+}
+function spawnEvil(){
+ startEvent('evil',G.up.cert?10:7);const left=Math.random()<.5?'8%':'72%';
+ layer.innerHTML=`<div class="evilAP eventObj" id="evil" style="left:${left}"><div class="apIcon">📡</div><div class="ssid">FreeCafe_WiFi</div><div class="apMeta">BSSID DE:AD:BE:EF:00:42</div><div class="tapHint">TAP THE IMPOSTOR</div></div>`;
+ mission('👯','An evil twin copied the café SSID.','Tap the impostor access point—not the familiar name.',100);
+ $('evil').onclick=()=>{points(110,'BSSID mismatch found. Evil twin blocked.');layer.innerHTML='';endEvent()};
+ $('legitAP').onclick=legitMisTap;
+}
+function legitMisTap(){if(G.event!=='evil')return;impact(-4);toast('That is the registered AP. The name alone was not enough—check the BSSID.','bad');const f=document.createElement('div');f.className='scanFlash';$('legitAP').appendChild(f);setTimeout(()=>f.remove(),750)}
+function makeDraggable(el,target,success){
+ let d=null;
+ const down=e=>{if(G.phase!=='play')return;d={x:e.clientX,y:e.clientY,l:el.offsetLeft,t:el.offsetTop,moved:false};el.classList.add('dragging');el.setPointerCapture?.(e.pointerId);e.preventDefault()};
+ const move=e=>{if(!d)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>7)d.moved=true;const r=stage.getBoundingClientRect();let nx=d.l+(e.clientX-d.x),ny=d.t+(e.clientY-d.y);nx=Math.max(4,Math.min(r.width-el.offsetWidth-4,nx));ny=Math.max(4,Math.min(r.height-el.offsetHeight-4,ny));el.style.left=nx+'px';el.style.top=ny+'px';const tr=target.getBoundingClientRect();const er=el.getBoundingClientRect();const hit=!(er.right<tr.left||er.left>tr.right||er.bottom<tr.top||er.top>tr.bottom);target.classList.toggle('hot',hit)};
+ const up=e=>{if(!d)return;const moved=d.moved;d=null;el._wasDragged=moved;el.classList.remove('dragging');target.classList.remove('hot');const tr=target.getBoundingClientRect(),er=el.getBoundingClientRect();const hit=!(er.right<tr.left||er.left>tr.right||er.bottom<tr.top||er.top>tr.bottom);if(hit)success();else if(moved)toast('Drag it into the highlighted zone—or tap it for quick action.','bad');setTimeout(()=>{el._wasDragged=false},300)};
+ el.addEventListener('pointerdown',down);el.addEventListener('pointermove',move);el.addEventListener('pointerup',up);el.addEventListener('dblclick',success);
+}
+function spawnRogue(){
+ startEvent('rogue',9);layer.innerHTML=`<div class="rogueRouter eventObj" id="rogue"><div class="apIcon">📶</div><div class="ssid">Employee Router</div><div class="small">UNAUTHORIZED · plugged into LAN</div><div class="cable"></div></div>`;
+ mission('🔌','An employee plugged in an unauthorized router.','Drag it to IT quarantine. Double-tap also works.',100);
+ const el=$('rogue');makeDraggable(el,$('quarantine'),()=>{points(120,'Rogue AP removed from the internal network.');layer.innerHTML='';endEvent()});
+ el.onclick=e=>{if(el._wasDragged||G.event!=='rogue')return;if(e.detail===1){clearTimeout(el._ct);el._ct=setTimeout(()=>{if(G.event!=='rogue')return;points(105,'Quick quarantine completed.');layer.innerHTML='';endEvent()},260)}};
+}
+function spawnPortal(){
+ startEvent('portal',8);layer.innerHTML=`<div class="portal eventObj" id="portal"><button class="closeX" aria-label="Close fake portal">×</button><h3>FreeCafe Account Verification</h3><p>“Your session expired. Sign in to continue.”</p><div class="field">University email</div><div class="field">Password</div><div class="swipeHint">SWIPE THIS FAKE PAGE AWAY ↔</div></div>`;
+ mission('🎭','A cloned captive portal is asking for credentials.','Swipe it away—or tap × before a customer signs in.',100);
+ let el=$('portal'),start=null;
+ const closeBtn=el.querySelector('.closeX');closeBtn.onpointerdown=e=>e.stopPropagation();closeBtn.onclick=e=>{e.stopPropagation();portalGood()};
+ el.onpointerdown=e=>{start={x:e.clientX,y:e.clientY};el.setPointerCapture?.(e.pointerId)};
+ el.onpointermove=e=>{if(!start)return;let dx=e.clientX-start.x;el.style.transform=`translate(calc(-50% + ${dx}px),-50%) rotate(${dx/25}deg)`;el.style.opacity=String(Math.max(.35,1-Math.abs(dx)/360))};
+ el.onpointerup=e=>{if(!start)return;let dx=e.clientX-start.x;start=null;if(Math.abs(dx)>85)portalGood();else{el.style.transform='translate(-50%,-50%)';el.style.opacity='1'}};
+}
+function portalGood(){points(125,'Fake login rejected before credentials were entered.');layer.innerHTML='';endEvent()}
+function spawnDeauth(){
+ if(G.up.pmf){startEvent('deauth',3.2);layer.innerHTML=`<div class="deauthWrap"><div class="attacker">🕵️</div><div class="pulse"></div><div class="pulse p2"></div><button class="shieldBtn" id="shield"><span>🛡️</span>PMF ACTIVE</button></div>`;mission('🛡️','Forged deauthentication detected.','PMF is unlocked—tap the shield to verify the frame.',100)}
+ else{startEvent('deauth',6);layer.innerHTML=`<div class="deauthWrap"><div class="attacker">🕵️</div><div class="pulse"></div><div class="pulse p2"></div><div class="pulse p3"></div><button class="shieldBtn" id="shield"><span>🛡️</span>RAISE PMF SHIELD</button></div>`;mission('📴','A forged deauthentication burst is hitting customers.','Tap the PMF shield before clients are kicked offline.',100)}
+ $('shield').onclick=()=>{points(G.up.pmf?85:120,'Forged disconnect ignored. Customers stayed online.');layer.innerHTML='';endEvent()};
+}
+function spawnPassword(){
+ if(G.up.wpa3){startEvent('password',3);layer.innerHTML=`<div class="recovery"><h3>🔐 WPA3-SAE BLOCKED OFFLINE GUESSING</h3><p>The old shared-password capture path no longer produces a reusable offline check.</p><button id="claim">CLAIM DEFENSE BONUS</button></div>`;mission('🔐','Your WPA3 upgrade neutralized the weak-password wave.','Claim the automatic-defense bonus.',100);$('claim').onclick=()=>{points(95,'SAE removed the passive offline-guessing shortcut.');layer.innerHTML='';endEvent()};return}
+ startEvent('password',9);layer.innerHTML=`<div class="sticky eventObj" id="sticky"><div>“Here is the café Wi-Fi password!”</div><code>FreeCafe2026!</code><div class="small">shared in a group chat</div><div class="small">DRAG TO SHREDDER</div></div>`;
+ mission('🗒️','The shared Wi-Fi password leaked into a group chat.','Drag the sticky note to the shredder and rotate the secret.',100);
+ const el=$('sticky');makeDraggable(el,$('shredder'),()=>{points(115,'Shared secret rotated and leak contained.');layer.innerHTML='';endEvent()});el.onclick=e=>{if(el._wasDragged||G.event!=='password')return;if(e.detail===1){clearTimeout(el._ct);el._ct=setTimeout(()=>{if(G.event!=='password')return;points(100,'Password rotated and old secret revoked.');layer.innerHTML='';endEvent()},260)}};
+}
+function spawnCert(){
+ startEvent('cert',G.up.cert?10:7);layer.innerHTML=`<div class="certCard eventObj"><h3>⚠ Enterprise Wi-Fi Certificate Warning</h3><div class="certRow"><b>Expected:</b><span>radius.freecafe.example</span></div><div class="certRow"><b>Presented:</b><span>radius-freecafe-login.example.net</span></div><div class="certRow"><b>Issuer:</b><span>Unknown Lab CA</span></div><button class="rejectBtn" id="reject">REJECT UNTRUSTED SERVER</button></div>`;
+ mission('📜','A fake RADIUS server presented the wrong certificate.','Reject it. A familiar SSID does not authenticate the server.',100);
+ $('reject').onclick=()=>{points(120,'Certificate mismatch rejected. Corporate login protected.');layer.innerHTML='';endEvent()};
+}
+function spawnKarma(){
+ startEvent('karma',8);layer.innerHTML=`<div class="karma"><div class="phoneCard"><div class="phone">📱</div><b>Phone is probing for:</b><br>Home_WiFi · Office_WiFi<br><button class="toggle" id="autojoin">TURN OFF BLIND AUTO-JOIN</button></div><div class="karmaAP"><div class="ant">📡</div><b>Suspicious AP:</b><br>“Yes, that’s me!”<br>to every remembered name</div></div>`;
+ mission('🛰️','A KARMA-style AP is answering every remembered network name.','Tap the phone control to disable blind auto-join.',100);
+ $('autojoin').onclick=()=>{points(110,'Auto-join disabled. Device stopped trusting names alone.');layer.innerHTML='';endEvent()};
+}
+function spawnRecovery(name){
+ startEvent('recovery',7);const c=G.customers.find(x=>x.name===name)||G.customers[0];c.comp=true;renderCustomers();layer.innerHTML=`<div class="recovery"><h3>🚨 Incident Response Opportunity</h3><p>${c.name} entered credentials into the fake portal. Reset the account before the attacker reuses them.</p><button id="resetAccount">RESET ${c.name.toUpperCase()}'S ACCOUNT</button></div>`;mission('🔁','A customer account may be compromised.','Reset the account to contain the incident.',100);$('resetAccount').onclick=()=>resolveRecovery(c.id)
+}
+function resolveRecovery(id){if(G.event!=='recovery')return;const c=G.customers.find(x=>x.id===id);if(c)c.comp=false;renderCustomers();points(80,'Credentials reset and active sessions revoked.');layer.innerHTML='';endEvent()}
+function expire(){
+ const t=G.event;layer.innerHTML='';
+ if(t==='evil')fail('Evil twin attracted customers. Network trust fell.',18);
+ if(t==='rogue')fail('Unauthorized router remained connected to the LAN.',16);
+ if(t==='portal'){fail('A customer entered credentials into the cloned portal.',20);G.pendingRecovery=G.customers[Math.floor(Math.random()*G.customers.length)].name}
+ if(t==='deauth')fail('Customers were kicked offline by forged management frames.',17);
+ if(t==='password')fail('The shared password spread beyond the café.',16);
+ if(t==='cert')fail('A device trusted the fake authentication server.',20);
+ if(t==='karma')fail('A phone auto-joined an impostor network by name.',17);
+ if(t==='recovery'){G.customers.forEach(c=>c.comp=false);renderCustomers();fail('The compromised account was not reset in time.',18)}
+ endEvent(1.25)
+}
+function update(dt,now){
+ if(G.phase!=='play')return;G.time=Math.max(0,G.time-dt);
+ if(G.event){G.eventLeft-=dt;$('eventBar').style.width=Math.max(0,100*G.eventLeft/G.eventMax)+'%';if(G.eventLeft<=0)expire()}
+ else{G.nextIn-=dt;if(G.nextIn<=0)nextEvent()}
+ clearToast(now);hud();if(G.time<=0)finish(true)
+}
+function start(){G.phase='play';G.last=performance.now();$('overlay').style.display='none';mission('☕','Protect FreeCafe for 3 minutes.','Tap, drag, or swipe the threat itself—no tool palette.',0)}
+function finish(win){if(G.phase==='end')return;G.phase='end';let rank=G.health<=0?'TRAINEE':G.score>=1200?'CHIEF DEFENDER':G.score>=750?'SIGNAL SLEUTH':'CAFÉ GUARD';let best=0;try{best=Number(localStorage.getItem('signal_arcade_best')||0);if(G.score>best){best=G.score;localStorage.setItem('signal_arcade_best',String(best))}}catch(e){}
+ overlay(`<div class="eyebrow">ROUND COMPLETE</div><h1>${G.health>0?'🏆':'⚠️'} ${rank}</h1><p>${G.health>0?'FreeCafe survived the attack wave.':'The café security meter reached zero.'}</p><div class="statsGrid"><div><strong>${G.score}</strong><small>score</small></div><div><strong>${Math.ceil(G.health)}%</strong><small>security</small></div><div><strong>${G.handled}</strong><small>threats handled</small></div><div><strong>${G.missed}</strong><small>missed</small></div></div><div class="rules"><b>What the game reinforced:</b><br>SSID names are not identities; PMF protects disconnect messages; certificate validation defeats fake RADIUS; shared passwords leak; incident response can still limit damage.</div><button class="bigBtn" id="again">PLAY AGAIN</button><button class="secondBtn" id="copy">COPY CLASS RESULT</button><p style="font-size:11px;color:#86a2b9">Personal best: ${best}. No accounts or backend required.</p>`);$('again').onclick=reset;$('copy').onclick=()=>{const txt=`Signal Siege Arcade | ${rank} | ${G.score} pts | ${Math.ceil(G.health)}% security | ${G.handled} handled`;navigator.clipboard?.writeText(txt).then(()=>toast('Result copied')).catch(()=>prompt('Copy result:',txt))}
+}
+function overlay(html){$('modal').innerHTML=html;$('overlay').style.display='flex'}
+function intro(){overlay(`<div class="eyebrow">ARCADE MODE · LESS UI, MORE ACTION</div><h1>☕ Signal<br><span style="color:var(--green)">Siege</span></h1><p>You are FreeCafe's security lead. Threats appear directly in the café—interact with them before the timer expires.</p><div class="rules"><b>Only four gestures:</b><br>👆 Tap impostors, warnings, and shields.<br>🫳 Drag rogue hardware or leaked secrets to containment zones.<br>↔ Swipe fake login pages away.<br>⚡ Build a streak to automatically unlock certificate validation, PMF, and WPA3.</div><p>No scanning toolbar. No multi-button loadout. Each threat tells you what physical action to take.</p><button class="bigBtn" id="start">START 3-MINUTE ROUND</button><button class="secondBtn" id="how">SHOW EVENT EXAMPLES</button><p style="font-size:11px;color:#86a2b9">Educational simulation only—no real wireless scanning or credentials.</p>`);$('start').onclick=start;$('how').onclick=help}
+function help(){overlay(`<div class="eyebrow">HOW TO PLAY</div><h1>Direct-action defense</h1><div class="rules"><b>👯 Evil twin:</b> tap the impostor AP.<br><b>🔌 Rogue AP:</b> drag it into IT quarantine—or tap it for quick action.<br><b>🎭 Fake portal:</b> swipe it away or tap ×.<br><b>📴 Deauth:</b> tap the PMF shield.<br><b>🗒️ Password leak:</b> drag the sticky note to the shredder.<br><b>📜 Fake RADIUS:</b> reject the untrusted certificate.<br><b>🛰️ KARMA:</b> disable blind auto-join.<br><b>🔁 Recovery:</b> reset a compromised account.</div><button class="bigBtn" id="back">${G.returnToGame?'RESUME':'BACK'}</button>`);$('back').onclick=()=>{if(G.returnToGame){G.returnToGame=false;G.phase='play';G.last=performance.now();$('overlay').style.display='none'}else intro()}}
+function reset(){G=fresh();layer.innerHTML='';renderCustomers();hud();intro()}
+$('helpBtn').onclick=()=>{G.returnToGame=G.phase==='play';if(G.returnToGame)G.phase='paused';help()};$('pauseBtn').onclick=()=>{if(G.phase==='play'){G.phase='paused';overlay(`<div class="eyebrow">PAUSED</div><h1>☕ Café frozen</h1><p>Timers and threats are paused.</p><button class="bigBtn" id="resume">RESUME</button>`);$('resume').onclick=()=>{G.phase='play';G.last=performance.now();$('overlay').style.display='none'}}};$('resetBtn').onclick=reset;
+let prev=performance.now();function loop(now){let dt=Math.min(.15,(now-prev)/1000);prev=now;if(G.phase==='play')update(dt,now);requestAnimationFrame(loop)}
+G=fresh();renderCustomers();hud();intro();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
